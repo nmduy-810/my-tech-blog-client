@@ -1,0 +1,7 @@
+<app-header></app-header>
+
+<router-outlet></router-outlet>
+
+<app-footer *ngIf="_router.url !== '/login' && _router.url !== '/register' && _router.url !== '/settings'"></app-footer>
+
+<app-scroll-to-top></app-scroll-to-top>

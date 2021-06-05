@@ -1,0 +1,53 @@
+<header class="style2">
+    <div class="container-fluid">
+        <div class="logo">
+            <h2><a href="#" title="">Toi Thich Dev</a></h2>
+        </div><!-- logo end-->
+
+        <!--Categories Item-->
+        <nav>
+            <ul>
+                <li *ngFor="let item of categoriesItems">
+                    <a [routerLink]="item.link" routerLinkActive="router-link-active">{{item.title}}</a>
+                </li>
+            </ul>
+        </nav><!--navigation end-->
+
+        <!--Show this for logged out users-->
+        <div *appShowAuthed="false" class="rt-subs">
+            <!--Subscribe-->
+            <a class="subscribe-btn" href="#"><i class="la la-envelope-o"></i> Subscribe</a>
+
+            <!--Sign in-->
+            <a class="subscribe-btn" routerLink="/login" routerLinkActive="active"><i class="la la-user"></i> Sign in</a>
+
+            <!--Search-->
+            <a class="search-btn" href="#"><i class="la la-search"></i></a>
+        </div><!--rt-subs end-->
+
+        <!--Show this for log in users-->
+        <div *appShowAuthed="true" class="rt-subs">
+
+             <!--New Article-->
+             <a class="subscribe-btn" routerLink="/editor" routerLinkActive="active"><i class="la la la-edit"></i>Article</a>
+
+            <!--Settings-->
+            <a class="subscribe-btn" routerLink="/settings" routerLinkActive="active"><i class="la la-cog"></i> Settings</a>
+
+            <!--User name-->
+            <a class="subscribe-btn" [routerLink]="['/profile', currentUser.username]" routerLinkActive="active"> 
+                <img [src]="currentUser.image" *ngIf="currentUser.image" class="user-pic" />{{ currentUser.username }}
+            </a>
+
+        </div><!--rt-subs end-->
+
+        <div class="menu-btn">
+            <a href="#" title="">
+                <span class="bar1"></span>
+                <span class="bar2"></span>
+                <span class="bar3"></span>
+            </a>
+        </div><!--menu-btn end-->
+        <div class="clearfix"></div>
+    </div>
+</header><!--HEADER END-->

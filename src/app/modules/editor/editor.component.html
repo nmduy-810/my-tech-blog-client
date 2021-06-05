@@ -1,0 +1,77 @@
+<div class="form-style-5">
+
+  <!--Check errors-->
+  <app-list-errors [errors]="errors"></app-list-errors>
+
+  <form [formGroup]="articleForm">
+    <fieldset>
+      
+      <legend style="color:black;">
+        <span class="number">1</span>Article
+      </legend>
+
+      <!--Title-->
+      <fieldset>
+        <input class="form-control" type="text" formControlName="title" placeholder="Title *" />
+      </fieldset>
+
+      <!--Summary-->
+      <fieldset>
+        <input class="form-control" type="text" formControlName="description" placeholder="Summary *" />
+      </fieldset>
+      
+      <!--Tags-->
+      <fieldset>
+        <input class="form-control"
+          type="text"
+          placeholder="Enter tags"
+          [formControl]="tagField"
+          (keyup.enter)="addTag()" />
+
+        <div class="tag-list">
+          <span *ngFor="let tag of article.tagList"
+            class="tag-default tag-pill">
+            <i class="ion-close-round" (click)="removeTag(tag)"></i>
+            {{ tag }}
+          </span>
+        </div>
+      </fieldset>
+
+      <!--Categories-->
+      <!-- <label for="job">Categories</label>
+      <select id="job" name="field4">
+
+        <optgroup label="Indoors">
+          <option value="fishkeeping">Fishkeeping</option>
+          <option value="reading">Reading</option>
+          <option value="boxing">Boxing</option>
+          <option value="debate">Debate</option>
+          <option value="gaming">Gaming</option>
+          <option value="snooker">Snooker</option>
+          <option value="other_indoor">Other</option>
+        </optgroup>
+
+        <optgroup label="Outdoors">
+          <option value="football">Football</option>
+          <option value="swimming">Swimming</option>
+          <option value="fishing">Fishing</option>
+          <option value="climbing">Climbing</option>
+          <option value="cycling">Cycling</option>
+          <option value="other_outdoor">Other</option>
+        </optgroup>
+      </select> -->
+
+      <!--Content-->
+      <fieldset>
+        <legend style="color:black">
+          <span class="number">2</span>Content
+        </legend>
+        <ckeditor [editor]="body" formControlName="body"></ckeditor>
+      </fieldset>
+
+      <!--Button published-->
+      <input type="submit" value="Published" (click)="submitForm()" />
+
+    </fieldset>
+  </form>
+</div>

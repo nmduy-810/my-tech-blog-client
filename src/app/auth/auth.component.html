@@ -1,0 +1,62 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 p-t-50 p-b-90">
+      <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+        <!--Title-->
+        <span class="login100-form-title p-b-51">
+          {{ title }}
+        </span>
+        
+        <!-- <app-list-errors [errors]="errors"></app-list-errors> -->
+
+        <fieldset [disabled]="isSubmitting">
+          <!--User name-->
+          <fieldset class="form-group">
+            <div *ngIf="authType == 'register'" class="wrap-input100 validate-input m-b-16">
+              <input class="input100 form-control" id="username" formControlName="username" placeholder="Username" type="text">
+              <span class="focus-input100"></span>
+            </div>
+          </fieldset>
+
+          <!--Email-->
+          <fieldset class="form-group">
+            <div class="wrap-input100 validate-input m-b-16">
+              <input class="input100 form-control" id="email" formControlName="email" placeholder="Email" type="text">
+              <span class="focus-input100"></span>
+            </div>
+          </fieldset>
+          
+          <!--Password-->
+          <fieldset class="form-group">
+            <div class="wrap-input100 validate-input m-b-16">
+              <input class="input100 form-control" id="password" type="password" formControlName="password" placeholder="Password">
+              <span class="focus-input100"></span>
+            </div>
+          </fieldset>
+
+          <!--Remember me-->
+          <div class="flex-sb-m w-full p-t-3 p-b-24">
+            <div class="contact100-form-checkbox">
+              <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+              <label class="label-checkbox100" for="ckb1">
+                Remember me
+              </label>
+            </div>
+  
+            <div>
+              <a class="txt1" [routerLink]="['/login']" *ngIf="authType == 'register'">Have an account?</a>
+              <a class="txt1" [routerLink]="['/register']" *ngIf="authType == 'login'">Need an account?</a>
+            </div>
+          </div>
+  
+          <div class="container-login100-form-btn m-t-17">
+            <button class="login100-form-btn" [disabled]="!authForm.valid" type="submit">
+             {{title}}
+            </button>
+          </div>
+
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>

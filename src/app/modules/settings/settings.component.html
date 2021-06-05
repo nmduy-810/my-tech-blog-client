@@ -1,0 +1,59 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 p-t-50 p-b-90">
+      <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
+
+        <!--Title-->
+        <span class="login100-form-title p-b-51">
+          Your Settings
+        </span>
+
+        <app-list-errors [errors]="errors"></app-list-errors>
+
+        <fieldset [disabled]="isSubmitting">
+
+          <!--User name-->
+          <fieldset class="form-group">
+            <div class="wrap-input100 validate-input m-b-16">
+              <input class="input100 form-control" formControlName="username" placeholder="Username" type="text">
+              <span class="focus-input100"></span>
+            </div>
+          </fieldset>
+
+          <!--Email-->
+          <fieldset class="form-group">
+            <div class="wrap-input100 validate-input m-b-16">
+              <input class="input100 form-control" formControlName="email" placeholder="Email" type="email">
+              <span class="focus-input100"></span>
+            </div>
+          </fieldset>
+
+          <!--New password-->
+          <fieldset class="form-group">
+            <div class="wrap-input100 validate-input m-b-16">
+              <input class="input100 form-control" formControlName="password" placeholder="New password" type="password">
+              <span class="focus-input100"></span>
+            </div>
+          </fieldset>
+
+          <!--Button-->
+          <div class="container-login100-form-btn m-t-17">
+            <button class="login100-form-btn" type="submit">
+              Update Settings
+            </button>
+          </div>
+        </fieldset>
+
+        <!-- Line break for logout button -->
+        <hr />
+
+        <div class="container-login100-form-btn m-t-17">
+          <button class="btn-outline-danger" (click)="logout()">
+            Or click here to logout.
+          </button>
+        </div>
+
+      </form>  
+    </div>
+  </div>
+</div>
