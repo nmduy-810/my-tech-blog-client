@@ -12,15 +12,15 @@
         <fieldset [disabled]="isSubmitting">
           <!--User name-->
           <fieldset class="form-group">
-            <div *ngIf="authType == 'register'" class="wrap-input100 validate-input m-b-16">
-              <input class="input100 form-control" id="username" formControlName="username" placeholder="Username" type="text">
+            <div class="wrap-input100 validate-input m-b-16">
+              <input class="input100 form-control" id="username" formControlName="username" placeholder="{{placeHolder}}" type="text">
               <span class="focus-input100"></span>
             </div>
           </fieldset>
 
           <!--Email-->
           <fieldset class="form-group">
-            <div class="wrap-input100 validate-input m-b-16">
+            <div *ngIf="authType == 'register'" class="wrap-input100 validate-input m-b-16">
               <input class="input100 form-control" id="email" formControlName="email" placeholder="Email" type="text">
               <span class="focus-input100"></span>
             </div>
