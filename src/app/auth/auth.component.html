@@ -6,56 +6,52 @@
         <span class="login100-form-title p-b-51">
           {{ title }}
         </span>
-        
-        <!-- <app-list-errors [errors]="errors"></app-list-errors> -->
 
-        <fieldset [disabled]="isSubmitting">
-          <!--User name-->
-          <fieldset class="form-group">
-            <div class="wrap-input100 validate-input m-b-16">
-              <input class="input100 form-control" id="username" formControlName="username" placeholder="{{placeHolder}}" type="text">
-              <span class="focus-input100"></span>
-            </div>
-          </fieldset>
 
-          <!--Email-->
-          <fieldset class="form-group">
-            <div *ngIf="authType == 'register'" class="wrap-input100 validate-input m-b-16">
-              <input class="input100 form-control" id="email" formControlName="email" placeholder="Email" type="text">
-              <span class="focus-input100"></span>
-            </div>
-          </fieldset>
-          
-          <!--Password-->
-          <fieldset class="form-group">
-            <div class="wrap-input100 validate-input m-b-16">
-              <input class="input100 form-control" id="password" type="password" formControlName="password" placeholder="Password">
-              <span class="focus-input100"></span>
-            </div>
-          </fieldset>
+        <!--User name-->
+        <div class="wrap-input100 validate-input m-b-16">
+          <input class="input100 form-control" id="username" formControlName="username" placeholder="{{placeHolder}}"
+            type="text" [ngClass]="{'is-invalid': submitted && f.username.errors}">
+          <span class="focus-input100"></span>
+        </div>
 
-          <!--Remember me-->
-          <div class="flex-sb-m w-full p-t-3 p-b-24">
-            <div class="contact100-form-checkbox">
-              <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-              <label class="label-checkbox100" for="ckb1">
-                Remember me
-              </label>
-            </div>
-  
-            <div>
-              <a class="txt1" [routerLink]="['/login']" *ngIf="authType == 'register'">Have an account?</a>
-              <a class="txt1" [routerLink]="['/register']" *ngIf="authType == 'login'">Need an account?</a>
-            </div>
-          </div>
-  
-          <div class="container-login100-form-btn m-t-17">
-            <button class="login100-form-btn" [disabled]="!authForm.valid" type="submit">
-             {{title}}
-            </button>
+
+        <!--Email-->
+        <div *ngIf="authType == 'register'" class="wrap-input100 validate-input m-b-16">
+          <input class="input100 form-control" id="email" formControlName="email" placeholder="Email" type="text">
+          <span class="focus-input100"></span>
+        </div>
+
+        <!--Password-->
+
+        <div class="wrap-input100 validate-input m-b-16">
+          <input class="input100 form-control" id="password" type="password" formControlName="password"
+            placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+          <span class="focus-input100"></span>
+        </div>
+
+
+        <!--Remember me-->
+        <div class="flex-sb-m w-full p-t-3 p-b-24">
+          <div class="contact100-form-checkbox">
+            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+            <label class="label-checkbox100" for="ckb1">
+              Remember me
+            </label>
           </div>
 
-        </fieldset>
+          <div>
+            <a class="txt1" [routerLink]="['/login']" *ngIf="authType == 'register'">Have an account?</a>
+            <a class="txt1" [routerLink]="['/register']" *ngIf="authType == 'login'">Need an account?</a>
+          </div>
+        </div>
+
+        <div class="container-login100-form-btn m-t-17">
+          <button [disabled]="loading" class="login100-form-btn" type="submit">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            {{title}}
+          </button>
+        </div>
       </form>
     </div>
   </div>

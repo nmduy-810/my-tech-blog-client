@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 import { Errors } from '../core/models/errors.model';
+import { AlertService } from '../core/services/alert.service';
 import { UserService } from '../core/services/user.service';
 
 @Component({
@@ -12,12 +14,12 @@ import { UserService } from '../core/services/user.service';
 export class AuthComponent implements OnInit {
   authType: String = '';
   title: String = '';
-  errors: Errors = { errors: {} };
-  isSubmitting = false;
+  submitted = false;
   authForm!: FormGroup;
+  loading = false;
   placeHolder = 'Email or username';
 
-  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private fb: FormBuilder) {
+  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private fb: FormBuilder, private alertService: AlertService) {
     // use FormBuilder to create a form group
     this.authForm = this.fb.group({
       'username': ['', Validators.required],
@@ -41,22 +43,31 @@ export class AuthComponent implements OnInit {
     });
   }
 
+  // convenience getter for easy access to form fields
+  get f() { return this.authForm.controls; }
+
+
   submitForm() {
-    this.isSubmitting = true;
+    this.submitted = true;
 
-    this.errors = { errors: {} };
+    // reset alerts on submit
+    this.alertService.clear();
 
-    this.userService
-      .attemptAuth(this.authType, this.authForm.value)
-      .subscribe(
-        data => {
-          this.router.navigateByUrl('/');
-          //console.log(data);
-        },
-        err => {
-          this.errors = err;
-          this.isSubmitting = false;
-        }
-      );
+    // stop here if form is invalid
+    if (this.authForm.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    this.userService.attemptAuth(this.authType, this.authForm.value).pipe(first()).subscribe({
+      next: () => {
+        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.router.navigateByUrl(returnUrl);
+      },
+      error: error => {
+        this.alertService.error(error);
+        this.loading = true;
+      }
+    })
   }
 }

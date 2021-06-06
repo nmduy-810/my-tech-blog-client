@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ListErrorsComponent } from './list-errors.component';
 import { ShowAuthedDirective } from './show-authed.directive';
+import { AlertComponent } from './alert.component';
 
 @NgModule({
   declarations: [
-    ListErrorsComponent,
-    ShowAuthedDirective
+    ShowAuthedDirective,
+    AlertComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +24,7 @@ import { ShowAuthedDirective } from './show-authed.directive';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    ListErrorsComponent,
+    AlertComponent,
     ShowAuthedDirective
   ]
 })
