@@ -4,8 +4,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { JwtService } from './services/jwt.service';
 import { HttpTokenInterceptor } from './interceptors';
-import { ArticlesService } from './services/articles.service';
-import { TagsService } from './services/tags.service';
+import { ArticleService } from './services/article.service';
+import { TagService } from './services/tag.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { UserService } from './services/user.service';
 
@@ -19,8 +19,8 @@ import { UserService } from './services/user.service';
     ApiService,
     JwtService,
     UserService,
-    ArticlesService,
-    TagsService,
+    ArticleService,
+    TagService,
     AuthGuard
   ],
 })

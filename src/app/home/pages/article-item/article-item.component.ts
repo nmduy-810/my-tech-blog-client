@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Article } from 'src/app/core/models/article.model';
-import { ArticlesService } from 'src/app/core/services/articles.service';
+import { ArticleService } from 'src/app/core/services/article.service';
 
 @Component({
   selector: 'app-article-item',
@@ -12,14 +12,14 @@ export class ArticleItemComponent implements OnInit {
 
   $articles: Article[] = [];
 
-  constructor(private articlesService: ArticlesService) { }
+  constructor(private articleService: ArticleService) { }
 
   ngOnInit(): void {
     this.loadArticles();
   }
 
   loadArticles(): void {
-    this.articlesService.getArticles().subscribe(articles => {
+    this.articleService.getArticles().subscribe(articles => {
       this.$articles = articles;
       //console.log(articles);
     });

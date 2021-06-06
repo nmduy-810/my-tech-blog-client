@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Article } from 'src/app/core/models/article.model';
-import { ArticlesService } from 'src/app/core/services/articles.service';
+import { ArticleService } from 'src/app/core/services/article.service';
 
 @Component({
   selector: 'app-editor',
@@ -19,7 +19,7 @@ export class EditorComponent implements OnInit {
   public content = ClassicEditor;
 
   constructor(
-    private articlesService: ArticlesService, private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
+    private articleService: ArticleService, private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
     // use the FormBuilder to create a form group
     this.articleForm = this.fb.group({
       title: '',
@@ -63,7 +63,7 @@ export class EditorComponent implements OnInit {
     //update the model
     this.updateArticle(this.articleForm.value);
 
-    this.articlesService.add(this.article).subscribe(article => this.router.navigateByUrl('/'), err => {
+    this.articleService.add(this.article).subscribe(article => this.router.navigateByUrl('/'), err => {
       this.isSubmitting = true;
     });
   }

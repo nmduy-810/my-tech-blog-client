@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from 'src/app/core/models/article.model';
-import { ArticlesService } from 'src/app/core/services/articles.service';
+import { ArticleService } from 'src/app/core/services/article.service';
 
 @Component({
   selector: 'app-article-details',
@@ -12,7 +12,7 @@ export class ArticleDetailsComponent implements OnInit {
 
   article: Article | undefined;
 
-  constructor(private activatedRoute: ActivatedRoute, private articlesService: ArticlesService) { }
+  constructor(private activatedRoute: ActivatedRoute, private articlesService: ArticleService) { }
 
   getArticle() : void {
     const slug = String(this.activatedRoute.snapshot.paramMap.get('slug'));
