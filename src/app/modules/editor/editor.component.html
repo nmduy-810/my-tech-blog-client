@@ -1,7 +1,6 @@
 <div class="form-style-5">
 
   <!--Check errors-->
-  <app-list-errors [errors]="errors"></app-list-errors>
 
   <form [formGroup]="articleForm">
     <fieldset>
@@ -15,11 +14,21 @@
         <input class="form-control" type="text" formControlName="title" placeholder="Title *" />
       </fieldset>
 
+      <!--Seo title-->
+      <fieldset>
+        <input class="form-control" type="text" formControlName="seoTitle" placeholder="Seo title *" />
+      </fieldset>
+
+      <!--Slug-->
+      <fieldset>
+        <input class="form-control" type="text" formControlName="slug" placeholder="Slug *" />
+      </fieldset>
+
       <!--Summary-->
       <fieldset>
-        <input class="form-control" type="text" formControlName="description" placeholder="Summary *" />
+        <input class="form-control" type="text" formControlName="summary" placeholder="Summary *" />
       </fieldset>
-      
+
       <!--Tags-->
       <fieldset>
         <input class="form-control"
@@ -61,12 +70,17 @@
         </optgroup>
       </select> -->
 
+       <!--Thumbnail Image-->
+       <fieldset>
+        <input #thumbnailImage style="margin-bottom: 20px" accept=".jpg,.png,.gif" class="form-control" type="file" formControlName="thumbnailImage" placeholder="Thumbnail image *" />
+      </fieldset>
+      
       <!--Content-->
       <fieldset>
         <legend style="color:black">
           <span class="number">2</span>Content
         </legend>
-        <ckeditor [editor]="body" formControlName="body"></ckeditor>
+        <ckeditor [editor]="content" formControlName="content"></ckeditor>
       </fieldset>
 
       <!--Button published-->

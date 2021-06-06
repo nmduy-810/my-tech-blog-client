@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { UserService } from './core/services';
+import { UserService } from './core/services/user.service';
 
 @Component({
   selector: 'app-root',

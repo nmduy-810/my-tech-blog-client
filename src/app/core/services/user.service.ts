@@ -4,8 +4,8 @@ import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
-import { User } from '../models';
 import { map, distinctUntilChanged, windowTime } from 'rxjs/operators';
+import { User } from '../models/user.model';
 
 
 @Injectable()
