@@ -19,7 +19,7 @@ export class ArticleItemComponent implements OnInit {
   }
 
   loadArticles(): void {
-    this.articlesService.getAll().subscribe(articles => {
+    this.articlesService.getArticles().subscribe(articles => {
       this.$articles = articles;
       //console.log(articles);
     });

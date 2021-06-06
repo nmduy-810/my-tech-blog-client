@@ -50,8 +50,8 @@ export class AuthComponent implements OnInit {
     this.userService
       .attemptAuth(this.authType, this.authForm.value)
       .subscribe(
-        data => { 
-          this.router.navigateByUrl('/'); 
+        data => {
+          this.router.navigateByUrl('/');
           //console.log(data);
         },
         err => {

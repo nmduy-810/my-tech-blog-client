@@ -11,12 +11,34 @@ import { MessageService } from './message.service';
 export class ArticlesService {
   constructor (private apiService: ApiService, private messageService: MessageService) {}
 
-  get(articleId: number): Observable<Article> {
-    return this.apiService.get('/articles/' + articleId).pipe(retry(1));
+  /** GET articles from the server */
+  getArticles() : Observable<Article[]> {
+    return this.apiService.get('/articles').pipe(
+      tap(_ => 
+        this.log('fetched articles')), 
+        catchError(this.handleError<Article[]>('get', [])
+      )
+    );
   }
 
-  getAll() : Observable<Article[]> {
-    return this.apiService.get('/articles').pipe(tap(_ => this.log('fetched articles')), catchError(this.handleError<Article[]>('get', [])));
+  // /** GET article by id. Will 404 if id not found */
+  // getArticle(id: number): Observable<Article> {
+  //   return this.apiService.get('/articles/' + id).pipe(
+  //     tap(_ => 
+  //       this.log(`fetched article id=${id}`)), 
+  //       catchError(this.handleError<Article>(`getArticle id=${id}`)
+  //     )
+  //   );
+  // }
+
+  /** GET article by slug. Will 404 if id not found */
+  getArticle(slug: string): Observable<Article> {
+    return this.apiService.get('/articles/' + slug).pipe(
+      tap(_ => 
+        this.log(`fetched article slug=${slug}`)), 
+        catchError(this.handleError<Article>(`getArticle slug=${slug}`)
+      )
+    );
   }
 
   destroy(slug: string) {
@@ -66,7 +88,7 @@ export class ArticlesService {
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
-    this.messageService.add(`HeroService: ${message}`);
+    this.messageService.add(`ArticlesService: ${message}`);
   }
 
 }
