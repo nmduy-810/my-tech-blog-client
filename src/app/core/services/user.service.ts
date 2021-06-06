@@ -40,7 +40,7 @@ export class UserService {
 
   setAuth(user: User) {
     // Save JWT sent from server in localstorage
-    this.jwtService.saveToken(user.resultDataObject);
+    this.jwtService.saveToken(user.token);
 
     // Set current user data into observable
     this.currentUserSubject.next(user);
@@ -74,14 +74,9 @@ export class UserService {
   }
 
   // Update the user on the server (email, pass, etc)
-  update(user: any): Observable<User> {
+  update(user: User): Observable<any> {
     return this.apiService
-      .put('/users', { user })
-      .pipe(map(data => {
-        // Update the currentUser observable
-        this.currentUserSubject.next(data.user);
-        return data.user;
+      .put('/users/' + this.getCurrentUser().id, user).pipe(map(data => {this.currentUserSubject.next(data.user);
       }));
   }
-
 }

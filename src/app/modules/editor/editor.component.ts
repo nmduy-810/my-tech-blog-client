@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Article } from 'src/app/core/models/article.model';
 import { ArticleService } from 'src/app/core/services/article.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-editor',
@@ -19,7 +20,7 @@ export class EditorComponent implements OnInit {
   public content = ClassicEditor;
 
   constructor(
-    private articleService: ArticleService, private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
+    private articleService: ArticleService, private userService: UserService, private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
     // use the FormBuilder to create a form group
     this.articleForm = this.fb.group({
       title: '',
@@ -28,8 +29,8 @@ export class EditorComponent implements OnInit {
       summary: '',
       body: '',
       content: '',
-      thumbnailImage: ''
-
+      thumbnailImage: '',
+      userId: userService.getCurrentUser().id
     });
 
     //Initialized tagLists as empty array

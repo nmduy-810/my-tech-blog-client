@@ -17,22 +17,18 @@ export class SettingsComponent implements OnInit {
   isSubmitting = false;
 
   constructor(private router: Router, private userService: UserService, private fb: FormBuilder) { 
-    // create form group using the form builder
+
     this.settingsForm = this.fb.group({ 
       username: '',
-      bio: '',
       email: '',
       password: ''
     });
   }
 
   ngOnInit(): void {
-    //Copy of the current user object to place in editable form fields
-    console.log(this.userService.getCurrentUser());
 
     Object.assign(this.user, this.userService.getCurrentUser());
-    
-    //Pass value of user to form field
+
     this.settingsForm.patchValue(this.user);
   }
 
@@ -46,11 +42,13 @@ export class SettingsComponent implements OnInit {
 
     this.updateUser(this.settingsForm.value);
 
-    this.userService.update(this.user).subscribe(updateUser => this.router.navigateByUrl('/home' + updateUser.username),
+    this.userService.update(this.user).subscribe(updateUser => this.userService.purgeAuth(),
     error => {
       this.errors = error;
       this.isSubmitting = false;
     });
+
+    this.router.navigateByUrl('/');
   }
 
   updateUser(values: Object) {
